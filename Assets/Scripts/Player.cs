@@ -1,8 +1,7 @@
 using UnityEngine;
-
 public class Player : MonoBehaviour
 {
-    // Flip sprites horizontally based on input
+    public bool FlipWhenFacingRight;
     private void Update()
     {
         // Get the horizontal input value
@@ -17,10 +16,10 @@ public class Player : MonoBehaviour
             {
                 // Flip the sprite horizontally
                 if(horizontalInput < 0)
-                    spriteRenderer.flipX = false;
+                    spriteRenderer.flipX = !FlipWhenFacingRight;
                 
                 else if(horizontalInput > 0)
-                    spriteRenderer.flipX = true;
+                    spriteRenderer.flipX = FlipWhenFacingRight;
             }
         }
     }
