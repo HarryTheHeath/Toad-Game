@@ -308,6 +308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7bd71d15f643de4e99334c4dc605b94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FlipWhenFacingRight: 1
 --- !u!1001 &1381928841
 PrefabInstance:
   m_ObjectHideFlags: 0
