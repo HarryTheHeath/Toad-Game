@@ -38,7 +38,7 @@ public class Snake : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
 
-        if (other.gameObject.CompareTag("Snake"))
+        if (other.gameObject.CompareTag("Enemy"))
             return;
         
         PlayerController player = other.gameObject.GetComponent<PlayerController>();
@@ -63,7 +63,7 @@ public class Snake : MonoBehaviour
     
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Snake"))
+        if (other.gameObject.CompareTag("Enemy"))
             return;
         
         PlayerController player = other.gameObject.GetComponent<PlayerController>();
