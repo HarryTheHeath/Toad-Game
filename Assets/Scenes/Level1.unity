@@ -746,7 +746,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.04815674, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1084,9 +1084,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 2.25
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 2.25
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1146,12 +1146,92 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 9187425330302445871, guid: d534d1706c828314f826ea148aa5e8dc, type: 3}
+      propertyPath: Ro
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187425330302445871, guid: d534d1706c828314f826ea148aa5e8dc, type: 3}
+      propertyPath: Dah
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187425330302445871, guid: d534d1706c828314f826ea148aa5e8dc, type: 3}
+      propertyPath: Fus
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187425330302445871, guid: d534d1706c828314f826ea148aa5e8dc, type: 3}
       propertyPath: MaxBreath
-      value: 5
+      value: 2.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187425330302445871, guid: d534d1706c828314f826ea148aa5e8dc, type: 3}
+      propertyPath: RoColour.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187425330302445871, guid: d534d1706c828314f826ea148aa5e8dc, type: 3}
+      propertyPath: RoColour.b
+      value: 0.16464934
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187425330302445871, guid: d534d1706c828314f826ea148aa5e8dc, type: 3}
+      propertyPath: RoColour.g
+      value: 0.620325
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187425330302445871, guid: d534d1706c828314f826ea148aa5e8dc, type: 3}
+      propertyPath: RoColour.r
+      value: 0.9433962
       objectReference: {fileID: 0}
     - target: {fileID: 9187425330302445871, guid: d534d1706c828314f826ea148aa5e8dc, type: 3}
       propertyPath: BreathMetre
       value: 
       objectReference: {fileID: 1747615398}
+    - target: {fileID: 9187425330302445871, guid: d534d1706c828314f826ea148aa5e8dc, type: 3}
+      propertyPath: DahColour.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187425330302445871, guid: d534d1706c828314f826ea148aa5e8dc, type: 3}
+      propertyPath: DahColour.b
+      value: 0.2951673
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187425330302445871, guid: d534d1706c828314f826ea148aa5e8dc, type: 3}
+      propertyPath: DahColour.g
+      value: 0.3134186
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187425330302445871, guid: d534d1706c828314f826ea148aa5e8dc, type: 3}
+      propertyPath: DahColour.r
+      value: 0.9339623
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187425330302445871, guid: d534d1706c828314f826ea148aa5e8dc, type: 3}
+      propertyPath: FusColour.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187425330302445871, guid: d534d1706c828314f826ea148aa5e8dc, type: 3}
+      propertyPath: FusColour.b
+      value: 0.18244925
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187425330302445871, guid: d534d1706c828314f826ea148aa5e8dc, type: 3}
+      propertyPath: FusColour.g
+      value: 0.9433962
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187425330302445871, guid: d534d1706c828314f826ea148aa5e8dc, type: 3}
+      propertyPath: FusColour.r
+      value: 0.48348328
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187425330302445871, guid: d534d1706c828314f826ea148aa5e8dc, type: 3}
+      propertyPath: DefaultColour.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187425330302445871, guid: d534d1706c828314f826ea148aa5e8dc, type: 3}
+      propertyPath: DefaultColour.b
+      value: 0.38679248
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187425330302445871, guid: d534d1706c828314f826ea148aa5e8dc, type: 3}
+      propertyPath: DefaultColour.g
+      value: 0.38679248
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187425330302445871, guid: d534d1706c828314f826ea148aa5e8dc, type: 3}
+      propertyPath: DefaultColour.r
+      value: 0.38679248
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187425330302445871, guid: d534d1706c828314f826ea148aa5e8dc, type: 3}
+      propertyPath: BreathMetreImage
+      value: 
+      objectReference: {fileID: 992181094}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d534d1706c828314f826ea148aa5e8dc, type: 3}

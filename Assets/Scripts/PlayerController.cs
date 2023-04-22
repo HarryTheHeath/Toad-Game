@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,10 +22,22 @@ public class PlayerController : MonoBehaviour
     public float BreathHoldDuration;
     public bool Breathing;
     public Slider BreathMetre;
-    public float MaxBreath;
+    public Image BreathMetreImage;
+    
+    [Space(20)]
+    
+    public float Fus = 0.5f;
+    public float Ro = 1.25f;
+    public float Dah = 2f;
+    public float MaxBreath = 2.25f;
 
 
-    [Header("Cosmetics")]
+    [Header("Cosmetics")] 
+    public Color DefaultColour;
+    public Color FusColour;
+    public Color RoColour;
+    public Color DahColour;
+    
 
     [Header("Inputs")]
     private float _horizontalInput;
@@ -49,6 +60,10 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         BreathMetre.maxValue = MaxBreath;
+        DefaultColour.a = 1;
+        FusColour.a = 1;
+        RoColour.a = 1;
+        DahColour.a = 1;
     }
     
     
@@ -62,11 +77,10 @@ public class PlayerController : MonoBehaviour
         FlipPlayer();
         CalculateJump();
         CalculateBreath();
+        DisplayBreath();
     }
+    
 
-    
-    
-    
     private void GetPlayerComponents()=> _rb = GetComponent<Rigidbody2D>();
     
     
@@ -146,7 +160,29 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Held breath for: " + BreathHoldDuration + " seconds.");
             BreathHoldDuration = 0f;
         }
-        
         BreathMetre.value = BreathHoldDuration;
     }
+    
+    
+    
+    private void DisplayBreath()
+    {
+        if (!Breathing)
+            return;
+
+
+        if (BreathHoldDuration < Fus)
+            BreathMetreImage.color = DefaultColour;
+        
+        else if (BreathHoldDuration < Ro && BreathHoldDuration > Fus)
+            BreathMetreImage.color = FusColour;
+        
+        else if (BreathHoldDuration < Dah && BreathHoldDuration > Ro)
+            BreathMetreImage.color = RoColour;
+        
+        else if (BreathHoldDuration < MaxBreath && BreathHoldDuration > Dah)
+            BreathMetreImage.color = DahColour;
+        
+    }
+
 }
