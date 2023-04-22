@@ -1,4 +1,7 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+
 public class PlayerController : MonoBehaviour
 {
 
@@ -15,10 +18,29 @@ public class PlayerController : MonoBehaviour
     public float CheckRadius;
     public bool IsGrounded = true;
 
+
+    [Header("Breath Attack")] 
+    public float BreathHoldDuration;
+    public bool Breathing;
+    public Slider BreathMetre;
+    public Image BreathMetreImage;
+    public TextMeshProUGUI FusRoDah; 
     
-    [Header("Cosmetics")]
+    [Space(20)]
     
+    public float Fus = 0.5f;
+    public float Ro = 1.25f;
+    public float Dah = 2f;
+    public float MaxBreath = 2.25f;
+
+
+    [Header("Cosmetics")] 
+    public Color DefaultColour;
+    public Color FusColour;
+    public Color RoColour;
+    public Color DahColour;
     
+
     [Header("Inputs")]
     private float _horizontalInput;
     private bool _jumpInputDown;
@@ -35,7 +57,20 @@ public class PlayerController : MonoBehaviour
     private bool _isJumping = false;
     private float _jumpTimeCounter;
 
-    private void Start() => GetPlayerComponents();
+    private void Awake() => GetPlayerComponents();
+
+    private void Start()
+    {
+        BreathMetre.maxValue = MaxBreath;
+        DefaultColour.a = 1;
+        FusColour.a = 1;
+        RoColour.a = 1;
+        DahColour.a = 1;
+
+        FusRoDah.text = "";
+    }
+    
+    
 
     private void FixedUpdate() {}
 
@@ -45,11 +80,11 @@ public class PlayerController : MonoBehaviour
         CheckInputs();
         FlipPlayer();
         CalculateJump();
+        CalculateBreath();
+        DisplayBreath();
     }
+    
 
-    
-    
-    
     private void GetPlayerComponents()=> _rb = GetComponent<Rigidbody2D>();
     
     
@@ -60,7 +95,7 @@ public class PlayerController : MonoBehaviour
         _jumpInputDown = Input.GetKeyDown(KeyCode.Space);
         _jumpInputUp = Input.GetKeyUp(KeyCode.Space);
         _jumpInputHold = Input.GetKey(KeyCode.Space);
-        
+
         _breathInput = Input.GetMouseButtonDown(0);
         _breathInputHold = Input.GetMouseButton(0);
         _breathInputUp = Input.GetMouseButtonUp(0);
@@ -111,4 +146,75 @@ public class PlayerController : MonoBehaviour
         if (_jumpInputUp)
             _isJumping = false;
     }
+
+
+
+    private void CalculateBreath()
+    {
+
+        if (!IsGrounded)
+        {
+            BreathHoldDuration = 0;
+            Breathing = false;
+            return;
+        }
+
+        if (_breathInput)
+            Breathing = true;
+
+        if (_breathInputHold && Breathing)
+        {
+            BreathHoldDuration += Time.deltaTime;
+            //Debug.Log("Breathing In");
+        }
+
+        if (_breathInputUp)
+        {
+            Breathing = false;
+            //Debug.Log("Held breath for: " + BreathHoldDuration + " seconds.");
+            BreathHoldDuration = 0;
+            FusRoDah.text = "";
+        }
+        BreathMetre.value = BreathHoldDuration;
+    }
+    
+    
+    
+    private void DisplayBreath()
+    {
+        if (!Breathing || !IsGrounded)
+        {
+            FusRoDah.text = "";
+            BreathMetre.value = 0;
+            return;
+        }
+
+
+        if (BreathHoldDuration < Fus)
+        {
+            BreathMetreImage.color = DefaultColour;
+            FusRoDah.text = "";
+        }
+        
+        else if (BreathHoldDuration < Ro && BreathHoldDuration > Fus)
+        {
+            BreathMetreImage.color = FusColour;
+            FusRoDah.text = "FUS!";
+        }
+        
+        else if (BreathHoldDuration < Dah && BreathHoldDuration > Ro)
+        {
+            BreathMetreImage.color = RoColour;
+            FusRoDah.text = "RO!";
+        }
+        
+        else if (BreathHoldDuration < MaxBreath && BreathHoldDuration > Dah)
+        {
+            BreathMetreImage.color = DahColour;
+            FusRoDah.text = "DAH!";
+        }
+
+        FusRoDah.color = BreathMetreImage.color;
+    }
+
 }
