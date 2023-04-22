@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: WaveOne
   m_EditorClassIdentifier: 
   <EnemiesInWave>k__BackingField:
+  - {fileID: 3919939057160273290, guid: e8b814a5b53e3ad4f8afd9fd041e7754, type: 3}
   - {fileID: 5822675458546989223, guid: 8acf6b881ed0b42468a0565e3c1f9381, type: 3}
   <TimeBeforeThisWave>k__BackingField: 5
   <NumberToSpawn>k__BackingField: 1
