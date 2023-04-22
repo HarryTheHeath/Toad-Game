@@ -29,18 +29,26 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _rb;
     private bool _isJumping = false;
     private float _jumpTimeCounter;
-    
-    private void Start() => _rb = GetComponent<Rigidbody2D>();
 
-    private void FixedUpdate() => CheckInputs();
+    private void Start() => GetPlayerComponents();
+
+    private void FixedUpdate() {}
 
 
     private void Update()
     {
+        CheckInputs();
         FlipPlayer();
         CalculateJump();
     }
 
+    
+    
+    
+    private void GetPlayerComponents()=> _rb = GetComponent<Rigidbody2D>();
+    
+    
+    
     private void CheckInputs()
     {
         _horizontalInput = Input.GetAxisRaw("Horizontal");
@@ -49,6 +57,10 @@ public class PlayerController : MonoBehaviour
         _jumpInputHold = Input.GetKey(KeyCode.Space);
     }
 
+    
+    
+    
+    
     private void FlipPlayer()
     {
         if (_horizontalInput < 0) 
@@ -58,6 +70,9 @@ public class PlayerController : MonoBehaviour
             transform.eulerAngles = new Vector3(0, 180, 0);
     }
 
+    
+    
+    
     
     private void CalculateJump()
     {
