@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.Serialization;
+
 public class PlayerController : MonoBehaviour
 {
     
@@ -10,12 +12,13 @@ public class PlayerController : MonoBehaviour
     public Transform FeetPos;
     public LayerMask GroundLayer;
     public float CheckRadius;
+    public bool IsGrounded = true;
+
     
     [Header("Cosmetics")]
-    public bool FlipWhenFacingRight;
     
     
-   [Header("Inputs")]
+    [Header("Inputs")]
     private float _horizontalInput;
     private bool _jumpInputDown;
     private bool _jumpInputUp;
@@ -23,7 +26,6 @@ public class PlayerController : MonoBehaviour
     
     [Header("Under The Hood")]
     private Rigidbody2D _rb;
-    private bool _isGrounded = true;
     private bool _isJumping = false;
     private float _jumpTimeCounter;
     
@@ -37,11 +39,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        _isGrounded = Physics2D.OverlapCircle(FeetPos.position, CheckRadius, GroundLayer);
-
         FlipPlayer();
         CalculateJump();
-        
     }
 
     private void CheckInputs()
@@ -54,36 +53,28 @@ public class PlayerController : MonoBehaviour
 
     private void FlipPlayer()
     {
-        // Loop through each child object of the parent object
-        foreach(Transform child in transform)
-        {
-            // Get all childed sprite renderers
-            SpriteRenderer spriteRenderer = child.GetComponent<SpriteRenderer>();
-            if(spriteRenderer != null)
-            {
-                // Flip the sprite horizontally
-                if(_horizontalInput < 0)
-                    spriteRenderer.flipX = !FlipWhenFacingRight;
-                
-                else if(_horizontalInput > 0)
-                    spriteRenderer.flipX = FlipWhenFacingRight;
-            }
-        }
+        if (_horizontalInput < 0) 
+            transform.eulerAngles = Vector3.zero;
+
+        else if (_horizontalInput > 0)
+            transform.eulerAngles = new Vector3(0, 180, 0);
     }
 
     
     private void CalculateJump()
     {
+        IsGrounded = Physics2D.OverlapCircle(FeetPos.position, CheckRadius, GroundLayer);
+
         // Simple Jump 
-        if (_isGrounded == true && _jumpInputDown)
+        if (IsGrounded && _jumpInputDown)
         {
-            _rb.velocity = Vector2.up * JumpForce;
-            _isJumping = true;
-            _jumpTimeCounter = JumpTime;
+           _jumpTimeCounter = JumpTime; 
+           _rb.velocity = Vector2.up * JumpForce;
+           _isJumping = true;
         }
 
         // Hold Jump
-        if (_jumpInputHold && _isJumping == true)
+        if (_jumpInputHold && _isJumping)
         {
             if (_jumpTimeCounter > 0)
             {
