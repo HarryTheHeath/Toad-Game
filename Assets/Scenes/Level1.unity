@@ -1145,5 +1145,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 9187425330302445871, guid: d534d1706c828314f826ea148aa5e8dc, type: 3}
+      propertyPath: MaxBreath
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187425330302445871, guid: d534d1706c828314f826ea148aa5e8dc, type: 3}
+      propertyPath: BreathMetre
+      value: 
+      objectReference: {fileID: 1747615398}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d534d1706c828314f826ea148aa5e8dc, type: 3}

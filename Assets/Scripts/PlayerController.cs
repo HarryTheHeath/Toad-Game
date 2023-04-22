@@ -1,4 +1,7 @@
+using System;
 using UnityEngine;
+using UnityEngine.UI;
+
 public class PlayerController : MonoBehaviour
 {
 
@@ -15,10 +18,16 @@ public class PlayerController : MonoBehaviour
     public float CheckRadius;
     public bool IsGrounded = true;
 
-    
+
+    [Header("Breath Attack")] 
+    public float BreathHoldDuration;
+    public bool Breathing;
+    public Slider BreathMetre;
+    public float MaxBreath;
+
+
     [Header("Cosmetics")]
-    
-    
+
     [Header("Inputs")]
     private float _horizontalInput;
     private bool _jumpInputDown;
@@ -35,7 +44,14 @@ public class PlayerController : MonoBehaviour
     private bool _isJumping = false;
     private float _jumpTimeCounter;
 
-    private void Start() => GetPlayerComponents();
+    private void Awake() => GetPlayerComponents();
+
+    private void Start()
+    {
+        BreathMetre.maxValue = MaxBreath;
+    }
+    
+    
 
     private void FixedUpdate() {}
 
@@ -45,6 +61,7 @@ public class PlayerController : MonoBehaviour
         CheckInputs();
         FlipPlayer();
         CalculateJump();
+        CalculateBreath();
     }
 
     
@@ -61,7 +78,6 @@ public class PlayerController : MonoBehaviour
         _jumpInputUp = Input.GetKeyUp(KeyCode.Space);
         _jumpInputHold = Input.GetKey(KeyCode.Space);
         
-        _breathInput = Input.GetMouseButtonDown(0);
         _breathInputHold = Input.GetMouseButton(0);
         _breathInputUp = Input.GetMouseButtonUp(0);
     }
@@ -110,5 +126,27 @@ public class PlayerController : MonoBehaviour
         // Jump End
         if (_jumpInputUp)
             _isJumping = false;
+    }
+
+
+
+    private void CalculateBreath()
+    {
+        
+        if (_breathInputHold)
+        {
+            Breathing = true;
+            BreathHoldDuration += Time.deltaTime;
+            Debug.Log("Breathing In");
+        }
+
+        if (_breathInputUp)
+        {
+            Breathing = false;
+            Debug.Log("Held breath for: " + BreathHoldDuration + " seconds.");
+            BreathHoldDuration = 0f;
+        }
+        
+        BreathMetre.value = BreathHoldDuration;
     }
 }
