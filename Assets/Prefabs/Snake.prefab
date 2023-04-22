@@ -392,9 +392,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 4
-  _enter: {fileID: 0}
-  _die: {fileID: 0}
-  _eat: {fileID: 0}
+  _enter: {fileID: 8300000, guid: baa605f309f5171489cf9ebd57150bbc, type: 3}
+  _die: {fileID: 8300000, guid: 21ebf2146d340224b91d4db2e03eb7f5, type: 3}
+  _eat: {fileID: 8300000, guid: a88ef13dc7d1107419e50cff8f83ae74, type: 3}
   _audio: {fileID: -4928972779540249378}
   _head: {fileID: 2156868725534776521}
   _mouth: {fileID: -6317747382984923812}
