@@ -39,7 +39,16 @@ public class PlayerController : MonoBehaviour
     public Color FusColour;
     public Color RoColour;
     public Color DahColour;
-    
+
+    [Header("Audio")]
+    public AudioClip JumpSFX;
+    public AudioClip LandSFX;
+    public AudioClip TakeADeepBreathSFX;
+    public AudioClip FusSFX;
+    public AudioClip RoSFX;
+    public AudioClip DahSFX;
+    public AudioSource PhysicsAudio;
+    public AudioSource BreatheAudio;
 
     [Header("Inputs")]
     private float _horizontalInput;
@@ -56,6 +65,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _rb;
     private bool _isJumping = false;
     private float _jumpTimeCounter;
+    private bool _hasLanded = true;
 
     private void Awake() => GetPlayerComponents();
 
@@ -128,6 +138,10 @@ public class PlayerController : MonoBehaviour
            _jumpTimeCounter = JumpTime; 
            _rb.velocity = Vector2.up * JumpForce;
            _isJumping = true;
+
+           _hasLanded = false;
+           PhysicsAudio.clip = JumpSFX;
+           PhysicsAudio.Play();
         }
 
         // Hold Jump
@@ -145,6 +159,13 @@ public class PlayerController : MonoBehaviour
         // Jump End
         if (_jumpInputUp)
             _isJumping = false;
+            
+        if(IsGrounded && !_hasLanded)
+        {
+            _hasLanded = true;
+            PhysicsAudio.clip = LandSFX;
+            PhysicsAudio.Play();
+        }
     }
 
 
@@ -160,8 +181,14 @@ public class PlayerController : MonoBehaviour
         }
 
         if (_breathInput)
+        {
+            if (!Breathing)
+            {
+                BreatheAudio.clip = TakeADeepBreathSFX;
+                BreatheAudio.Play();
+            }
             Breathing = true;
-
+        }
         if (_breathInputHold && Breathing)
         {
             BreathHoldDuration += Time.deltaTime;
@@ -200,18 +227,27 @@ public class PlayerController : MonoBehaviour
         {
             BreathMetreImage.color = FusColour;
             FusRoDah.text = "FUS!";
+            
+            BreatheAudio.clip = FusSFX;
+            BreatheAudio.Play();
         }
         
         else if (BreathHoldDuration < Dah && BreathHoldDuration > Ro)
         {
             BreathMetreImage.color = RoColour;
             FusRoDah.text = "RO!";
+            
+            BreatheAudio.clip = RoSFX;
+            BreatheAudio.Play();
         }
         
         else if (BreathHoldDuration < MaxBreath && BreathHoldDuration > Dah)
         {
             BreathMetreImage.color = DahColour;
             FusRoDah.text = "DAH!";
+            
+            BreatheAudio.clip = DahSFX;
+            BreatheAudio.Play();
         }
 
         FusRoDah.color = BreathMetreImage.color;
