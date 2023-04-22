@@ -5,9 +5,13 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _rb;
     public float JumpForce;
     public bool IsGrounded = true;
+    private bool _isJumping = false;
     public Transform FeetPos;
     public float CheckRadius;
     public LayerMask GroundLayer;
+    private float _jumpTimeCounter;
+    public float JumpTime;
+    
     
 
     private void Start()
@@ -45,9 +49,32 @@ public class PlayerController : MonoBehaviour
         }
 
 
+        // Simple Jump 
         if (IsGrounded == true && Input.GetKeyDown(KeyCode.Space))
         {
             _rb.velocity = Vector2.up * JumpForce;
+            _isJumping = true;
+            _jumpTimeCounter = JumpTime;
+        }
+
+        // Hold Jump
+        if (Input.GetKey(KeyCode.Space) && _isJumping == true)
+        {
+            if (_jumpTimeCounter > 0)
+            {
+                _rb.velocity = Vector2.up * JumpForce;
+                _jumpTimeCounter -= Time.deltaTime;
+            }
+            else
+            {
+                _isJumping = false;
+            }
+        }
+
+        // Jump End
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            _isJumping = false;
         }
     }
 }
