@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Entity;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -53,7 +52,6 @@ public class Mushroom : MonoBehaviour
                 _audio.clip = _eat;
                 _audio.Play();
             }
-           
             Debug.Log("MUSHROOM ATE TOAD!");
         }
     }
