@@ -1,14 +1,13 @@
-using System;
 using UnityEngine;
-public class Player : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public bool FlipWhenFacingRight;
     private Rigidbody2D _rb;
+    public float JumpForce;
     public bool IsGrounded = true;
     public Transform FeetPos;
     public float CheckRadius;
     public LayerMask GroundLayer;
-    
     
 
     private void Start()
@@ -43,6 +42,12 @@ public class Player : MonoBehaviour
                 else if(horizontalInput > 0)
                     spriteRenderer.flipX = FlipWhenFacingRight;
             }
+        }
+
+
+        if (IsGrounded == true && Input.GetKeyDown(KeyCode.Space))
+        {
+            _rb.velocity = Vector2.up * JumpForce;
         }
     }
 }
