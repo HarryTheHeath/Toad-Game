@@ -25,6 +25,11 @@ public class PlayerController : MonoBehaviour
     private bool _jumpInputUp;
     private bool _jumpInputHold;
     
+    private bool _breathInput;
+    private bool _breathInputHold;
+    private bool _breathInputUp;
+
+    
     [Header("Under The Hood")]
     private Rigidbody2D _rb;
     private bool _isJumping = false;
@@ -55,6 +60,10 @@ public class PlayerController : MonoBehaviour
         _jumpInputDown = Input.GetKeyDown(KeyCode.Space);
         _jumpInputUp = Input.GetKeyUp(KeyCode.Space);
         _jumpInputHold = Input.GetKey(KeyCode.Space);
+        
+        _breathInput = Input.GetMouseButtonDown(0);
+        _breathInputHold = Input.GetMouseButton(0);
+        _breathInputUp = Input.GetMouseButtonUp(0);
     }
 
     
