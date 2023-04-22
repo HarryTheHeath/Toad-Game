@@ -637,15 +637,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7bd71d15f643de4e99334c4dc605b94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FlipWhenFacingRight: 0
   JumpForce: 10
-  IsGrounded: 1
+  JumpTime: 0.35
   FeetPos: {fileID: 216383071}
-  CheckRadius: 0.3
   GroundLayer:
     serializedVersion: 2
     m_Bits: 64
-  JumpTime: 0.35
+  CheckRadius: 0.3
+  FlipWhenFacingRight: 1
 --- !u!1 &2938175121341567289
 GameObject:
   m_ObjectHideFlags: 0

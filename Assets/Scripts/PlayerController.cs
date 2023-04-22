@@ -32,19 +32,28 @@ public class PlayerController : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
     }
 
-    private void FixedUpdate()
-    {
-         _horizontalInput = Input.GetAxisRaw("Horizontal");
-         _jumpInputDown = Input.GetKeyDown(KeyCode.Space);
-         _jumpInputUp = Input.GetKeyUp(KeyCode.Space);
-         _jumpInputHold = Input.GetKey(KeyCode.Space);
-    }
+    private void FixedUpdate() => CheckInputs();
 
 
     private void Update()
     {
         _isGrounded = Physics2D.OverlapCircle(FeetPos.position, CheckRadius, GroundLayer);
 
+        FlipPlayer();
+        CalculateJump();
+        
+    }
+
+    private void CheckInputs()
+    {
+        _horizontalInput = Input.GetAxisRaw("Horizontal");
+        _jumpInputDown = Input.GetKeyDown(KeyCode.Space);
+        _jumpInputUp = Input.GetKeyUp(KeyCode.Space);
+        _jumpInputHold = Input.GetKey(KeyCode.Space);
+    }
+
+    private void FlipPlayer()
+    {
         // Loop through each child object of the parent object
         foreach(Transform child in transform)
         {
@@ -60,8 +69,11 @@ public class PlayerController : MonoBehaviour
                     spriteRenderer.flipX = FlipWhenFacingRight;
             }
         }
+    }
 
-
+    
+    private void CalculateJump()
+    {
         // Simple Jump 
         if (_isGrounded == true && _jumpInputDown)
         {
