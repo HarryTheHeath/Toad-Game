@@ -195,6 +195,19 @@ MonoBehaviour:
     m_Bits: 64
   CheckRadius: 0.3
   IsGrounded: 1
+  BreathHoldDuration: 0
+  Breathing: 0
+  BreathMetre: {fileID: 0}
+  BreathMetreImage: {fileID: 0}
+  FusRoDah: {fileID: 0}
+  Fus: 0.5
+  Ro: 1
+  Dah: 1.75
+  MaxBreath: 2.25
+  DefaultColour: {r: 0.38679248, g: 0.38679248, b: 0.38679248, a: 1}
+  FusColour: {r: 0.48348328, g: 0.9433962, b: 0.18244925, a: 1}
+  RoColour: {r: 0.9433962, g: 0.620325, b: 0.16464934, a: 1}
+  DahColour: {r: 0.9339623, g: 0.3134186, b: 0.2951673, a: 1}
 --- !u!61 &6288771231978591698
 BoxCollider2D:
   m_ObjectHideFlags: 0
