@@ -1,12 +1,13 @@
 using UnityEngine;
-using UnityEngine.Serialization;
-
 public class PlayerController : MonoBehaviour
 {
-    
+
     [Header("Player Feel")]
-    public float JumpForce;
-    public float JumpTime;
+
+    [Range(0, 20)]
+    public int JumpForce = 10;
+    [Range(0, 0.6f)]
+    public float JumpTime = 0.3f;
 
     [Header("Ground Checks")]
     public Transform FeetPos;
@@ -29,10 +30,7 @@ public class PlayerController : MonoBehaviour
     private bool _isJumping = false;
     private float _jumpTimeCounter;
     
-    private void Start()
-    {
-        _rb = GetComponent<Rigidbody2D>();
-    }
+    private void Start() => _rb = GetComponent<Rigidbody2D>();
 
     private void FixedUpdate() => CheckInputs();
 

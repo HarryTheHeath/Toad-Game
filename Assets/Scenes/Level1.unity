@@ -638,7 +638,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JumpForce: 10
-  JumpTime: 0.5
+  JumpTime: 0.3
   FeetPos: {fileID: 216383071}
   GroundLayer:
     serializedVersion: 2
