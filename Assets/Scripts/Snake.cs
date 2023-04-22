@@ -1,5 +1,5 @@
+using Entity;
 using UnityEngine;
-
 
 public class Snake : MonoBehaviour
 {
@@ -54,7 +54,6 @@ public class Snake : MonoBehaviour
                 _audio.clip = _eat;
                 _audio.Play();
             }
-           
             Debug.Log("SNAKE ATE TOAD!");
         }
     }
