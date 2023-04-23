@@ -226,11 +226,7 @@ namespace Entity
         {
             if (!Breathing || !IsGrounded)
             {
-                FusRoDah.text = "";
-                BreathMetre.value = 0;
-                CanFus = false;
-                CanRo = false;
-                CanDah = false;
+                ClearBreathUI();
                 return;
             }
 
@@ -267,10 +263,22 @@ namespace Entity
                 CanDah = true;
             }
 
+            else if (BreathHoldDuration > MaxBreath)
+                ClearBreathUI();
+
             FusRoDah.color = BreathMetreImage.color;
         }
 
-        
+
+
+        private void ClearBreathUI()
+        {
+            FusRoDah.text = "";
+            BreathMetre.value = 0;
+            CanFus = false;
+            CanRo = false;
+            CanDah = false;
+        }
         
 
         private void Attack(GameObject breath, AudioClip breathSFX, float breathActiveTime, bool breathToggle)
