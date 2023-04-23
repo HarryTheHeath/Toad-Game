@@ -79,10 +79,34 @@ namespace Entity
             foreach (Transform child in transform)
             {
                 Rigidbody2D r = child.AddComponent<Rigidbody2D>();
-                r.velocity = new Vector2(Random.Range(-2,-5),Random.Range(5,8));
+                r.velocity = new Vector2(Random.Range(-5,5),Random.Range(5,8));
+                r.angularVelocity = Random.Range(-360f, 360f);
+                SpriteRenderer sprite = child.GetComponent<SpriteRenderer>();
+                if (sprite != null && !(sprite is null))
+                {
+                    StartCoroutine(FadeOut(sprite, 1));
+                }
             }
+            transform.DetachChildren();
             
             IsDead = true;
+        }
+        
+        private IEnumerator FadeOut(SpriteRenderer sprite, float fadeDuration)
+        {
+            float elapsedTime = 0f;
+            Color startColor = sprite.color;
+
+            while (elapsedTime < fadeDuration)
+            {
+                float alpha = Mathf.Lerp(1f, 0f, elapsedTime / fadeDuration);
+                sprite.color = new Color(startColor.r, startColor.g, startColor.b, alpha);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            // Make sure alpha is set to zero at the end of the fade
+            sprite.color = new Color(startColor.r, startColor.g, startColor.b, 0f);
         }
 
         private IEnumerator InvulnFrameTimer(float invulnFrameTimer)
