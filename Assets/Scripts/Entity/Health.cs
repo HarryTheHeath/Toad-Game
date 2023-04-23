@@ -78,7 +78,11 @@ namespace Entity
         
             foreach (Transform child in transform)
             {
-                Rigidbody2D r = child.AddComponent<Rigidbody2D>();
+                Rigidbody2D r = child.GetComponent<Rigidbody2D>();
+                if (r is null)
+                {
+                    r = child.AddComponent<Rigidbody2D>();
+                }
                 r.velocity = new Vector2(Random.Range(-5,5),Random.Range(5,8));
                 r.angularVelocity = Random.Range(-360f, 360f);
                 SpriteRenderer sprite = child.GetComponent<SpriteRenderer>();
