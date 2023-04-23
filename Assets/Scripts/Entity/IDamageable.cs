@@ -6,5 +6,4 @@ namespace Entity
 
         public void ModifyHealth(int healthValueChange);
     }
-   
 }

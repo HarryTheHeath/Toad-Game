@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Entity
 {
@@ -28,6 +30,9 @@ namespace Entity
         {
             CurrentHealth = _health;
             OnHealthChanged?.Invoke(CurrentHealth);
+            
+            if (CompareTag("Player"))
+                GameObject.Find("PlayerHealth").GetComponent<TMPro.TextMeshProUGUI>().text = _health.ToString();
         }
 
         public void ModifyHealth(int healthValueChange)
@@ -37,6 +42,9 @@ namespace Entity
                 
             CurrentHealth += healthValueChange;
             OnHealthChanged?.Invoke(CurrentHealth);
+            
+            if (CompareTag("Player"))
+                GameObject.Find("PlayerHealth").GetComponent<TMPro.TextMeshProUGUI>().text = _health.ToString();
 
 
             if (!_invulnerable && healthValueChange <= 0)
@@ -54,40 +62,33 @@ namespace Entity
                 //_animator.SetTrigger(Animator.StringToHash("Dead"));
                 StartCoroutine(StartDeath());
             }
+
         }
 
         private IEnumerator StartDeath()
         {
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(0f);
             OnDeath();
         }
         
         private void OnDeath() 
         {
             
-            if (gameObject.CompareTag("Enemy"))
+            Destroy((GetComponent<Animator>()));
+        
+            foreach (Transform child in transform)
             {
-                Destroy(gameObject);
+                Rigidbody2D r = child.AddComponent<Rigidbody2D>();
+                r.velocity = new Vector2(Random.Range(-2,-5),Random.Range(5,8));
             }
-
-
-            if (gameObject.CompareTag("Player"))
-            {
-                
-            }
-            gameObject.SetActive(false);
             
-
             IsDead = true;
         }
 
         private IEnumerator InvulnFrameTimer(float invulnFrameTimer)
         {
             _invulnerable = true;
-            var originalColor = GetComponent<SpriteRenderer>().color;             
-            GetComponent<SpriteRenderer>().color = Color.red;             
             yield return new WaitForSeconds(invulnFrameTimer);
-            GetComponent<SpriteRenderer>().color = originalColor;
             _invulnerable = false;
         }
     }
