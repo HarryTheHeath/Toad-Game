@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf42af7e96f4684a927263630bbd618, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 2
   _enter: {fileID: 8300000, guid: a854bdfea3c33ed4f94f709f03ad7277, type: 3}
   _die: {fileID: 8300000, guid: a814a49a3c1ce5a44a2c84b6565ff6d6, type: 3}
   _eat: {fileID: 8300000, guid: 7ec0df3d275613948a40e727cc220748, type: 3}
