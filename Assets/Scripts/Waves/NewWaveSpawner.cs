@@ -19,34 +19,40 @@ public class NewWaveSpawner : MonoBehaviour
     private void Start()
     {
         StartCoroutine(WaveWait(WaveBuffer));
-        StartCoroutine(CommenceWaves());
+        StartCoroutine(LoopOfCoroutines(CurrentWave));
+    }
+    
+    
+    private IEnumerator WaveWait(float WaveTime) { yield return new WaitForSeconds(WaveTime); }
+
+
+    private IEnumerator LoopOfCoroutines(int currentWave)
+    {
         
-    }
-    
-
-    private IEnumerator WaveWait(float WaveTime)
-    {
-        yield return new WaitForSeconds(WaveTime);
-    }
-    
-    
-
-    private IEnumerator CommenceWaves()
-    {
-        for (var i = 0; i < Wave[CurrentWave].Enemy.Length; i++)
+        for (int i = 0; i < Wave.Length; i++)
         {
-            Instantiate(Wave[CurrentWave].Enemy[i], Wave[CurrentWave].SpawnPoint[i].position,
+            Debug.Log($"Wave {i} begins...");
+            yield return StartCoroutine(CommenceWaves(currentWave));
+        }
+    }
+    
+    
+
+    private IEnumerator CommenceWaves(int currentWave)
+    {
+        for (var i = 0; i < Wave[currentWave].Enemy.Length; i++)
+        {
+            Instantiate(Wave[currentWave].Enemy[i], Wave[currentWave].SpawnPoint[i].position,
                 quaternion.identity);
                 
-            NextSpawnTime = Wave[CurrentWave].SpawnBuffer[i] + Random.Range(-SpawnTimeMultiplier, SpawnTimeMultiplier);
+            NextSpawnTime = Wave[currentWave].SpawnBuffer[i] + Random.Range(-SpawnTimeMultiplier, SpawnTimeMultiplier);
             Debug.Log($"NextEnemyComing in... {NextSpawnTime} seconds");
 
             yield return new WaitForSeconds(NextSpawnTime);
         }
-        
+
         Debug.Log("Wave Over");
+        yield return new WaitForSeconds(WaveBuffer);
         CurrentWave++;
     }
-    
-    
 }
