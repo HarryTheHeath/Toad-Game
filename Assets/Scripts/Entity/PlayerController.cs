@@ -242,9 +242,6 @@ namespace Entity
                 BreathMetreImage.color = FusColour;
                 FusRoDah.text = "FUS!";
                 CanFus = true;
-
-                BreatheAudio.clip = FusSFX;
-                BreatheAudio.Play();
             }
 
             else if (BreathHoldDuration < DahTime && BreathHoldDuration > RoTime)
