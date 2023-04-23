@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Entity;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -13,6 +12,7 @@ public class Mushroom : MonoBehaviour
     
     private Rigidbody2D _rigidbody2D;
     private PlayerController _playerController;
+    public int Damage = 1;
 
     private void Start()
     {
@@ -53,8 +53,9 @@ public class Mushroom : MonoBehaviour
                 _audio.clip = _eat;
                 _audio.Play();
             }
-           
             Debug.Log("MUSHROOM ATE TOAD!");
+            other.gameObject.GetComponent<IDamageable>().ModifyHealth(-Damage);
+            Die();
         }
     }
     
@@ -64,16 +65,10 @@ public class Mushroom : MonoBehaviour
         {
             _audio.clip = _die;
             _audio.Play();
-        }
+            Destroy(gameObject, _audio.clip.length);
 
-        Destroy((GetComponent<Animator>()));
-        
-        foreach (Transform child in transform)
-        {
-            Rigidbody2D r = child.AddComponent<Rigidbody2D>();
-            r.velocity = new Vector2(Random.Range(-2,-5),Random.Range(5,8));
         }
         
-        Destroy(gameObject, _audio.clip.length);
+        GetComponent<IDamageable>().ModifyHealth(-Damage);
     }
 }

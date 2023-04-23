@@ -1,0 +1,95 @@
+using System;
+using System.Collections;
+using Unity.VisualScripting;
+using UnityEngine;
+using Random = UnityEngine.Random;
+
+namespace Entity
+{
+    public class Health : MonoBehaviour, IDamageable
+    {
+        public Action<int> OnHealthChanged;
+        [SerializeField]
+        private int _health;
+        
+        [SerializeField]
+        [Tooltip("The amount of time the entity is invulnerable after being hit")]
+        private float _invulnerabilityTime;
+        private bool _invulnerable;
+
+        private bool IsDead { get; set; }
+        
+        
+        public int CurrentHealth
+        {
+            get => _health;
+            set => _health = value;
+        }
+        
+        private void Start()
+        {
+            CurrentHealth = _health;
+            OnHealthChanged?.Invoke(CurrentHealth);
+            
+            if (CompareTag("Player"))
+                GameObject.Find("PlayerHealth").GetComponent<TMPro.TextMeshProUGUI>().text = _health.ToString();
+        }
+
+        public void ModifyHealth(int healthValueChange)
+        {
+            if (_invulnerable && healthValueChange <= 0)
+                    return;  
+                
+            CurrentHealth += healthValueChange;
+            OnHealthChanged?.Invoke(CurrentHealth);
+            
+            if (CompareTag("Player"))
+                GameObject.Find("PlayerHealth").GetComponent<TMPro.TextMeshProUGUI>().text = _health.ToString();
+
+
+            if (!_invulnerable && healthValueChange <= 0)
+            {
+                StartCoroutine(InvulnFrameTimer(_invulnerabilityTime));
+
+                if (CurrentHealth > 0){
+                    //_animator.SetTrigger(Animator.StringToHash("TakeDamage"));
+                }
+                
+            }
+            
+            if (CurrentHealth <= 0)
+            {
+                //_animator.SetTrigger(Animator.StringToHash("Dead"));
+                StartCoroutine(StartDeath());
+            }
+
+        }
+
+        private IEnumerator StartDeath()
+        {
+            yield return new WaitForSeconds(0f);
+            OnDeath();
+        }
+        
+        private void OnDeath() 
+        {
+            
+            Destroy((GetComponent<Animator>()));
+        
+            foreach (Transform child in transform)
+            {
+                Rigidbody2D r = child.AddComponent<Rigidbody2D>();
+                r.velocity = new Vector2(Random.Range(-2,-5),Random.Range(5,8));
+            }
+            
+            IsDead = true;
+        }
+
+        private IEnumerator InvulnFrameTimer(float invulnFrameTimer)
+        {
+            _invulnerable = true;
+            yield return new WaitForSeconds(invulnFrameTimer);
+            _invulnerable = false;
+        }
+    }
+}

@@ -79,9 +79,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Waves:
   - {fileID: 11400000, guid: 82172221c0d39784c8f525c4293f6369, type: 2}
+  - {fileID: 11400000, guid: 82172221c0d39784c8f525c4293f6369, type: 2}
+  - {fileID: 11400000, guid: 82172221c0d39784c8f525c4293f6369, type: 2}
   _spawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 3478870656054200175}
+  - {fileID: 3478870656708484345}
 --- !u!1 &3478870656708484344
 GameObject:
   m_ObjectHideFlags: 0
