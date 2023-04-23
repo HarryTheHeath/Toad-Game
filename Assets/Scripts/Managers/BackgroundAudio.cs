@@ -10,6 +10,7 @@ public class BackgroundAudio : MonoBehaviour
     public AudioClip[] randomSFXs;
     public float randomSFXMinDelay = 1;
     public float randomSFXMaxDelay = 5;
+    public AudioClip deathJingle;
 
     public AudioSource soundscape;
     public AudioSource music;
@@ -54,5 +55,16 @@ public class BackgroundAudio : MonoBehaviour
     {
         int r = Random.Range(0, clips.Length);
         return clips[r];
+    }
+
+    public void OnDeath()
+    {
+        StopCoroutine("PlayRandomSFX");
+        
+        random.clip = deathJingle;
+        random.Play();
+
+        soundscape.volume = 0.2f;
+        music.volume = 0.3f;
     }
 }
