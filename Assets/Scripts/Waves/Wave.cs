@@ -4,11 +4,12 @@ using UnityEngine;
 public class Wave : ScriptableObject
 {
     [field: SerializeField]
-    public GameObject[] EnemiesInWave { get; private set; }
+    public GameObject[] Enemy { get; private set; }
     
     [field: SerializeField]
-    public float TimeBeforeThisWave { get; private set; }
- 
+    public float[] SpawnBuffer { get; private set; }
+    
+    
     [field: SerializeField]
-    public float NumberToSpawn { get; private set; }
+    public Transform[] SpawnPoint { get; private set; }
 }
