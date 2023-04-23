@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,7 @@ namespace Entity
 
         [Header("Player Feel")] [Range(0, 20)] public int JumpForce = 10;
         [Range(0, 0.6f)] public float JumpTime = 0.3f;
+        [Range(0.01f, 0.2f)]public float BreathActiveTime;
 
         [Header("Ground Checks")] public Transform FeetPos;
         public LayerMask GroundLayer;
@@ -17,16 +19,24 @@ namespace Entity
         public bool IsGrounded = true;
 
 
-        [Header("Breath Attack")] public float BreathHoldDuration;
+        [Header("Breath Attack")] public GameObject Fus;
+        public GameObject Ro;
+        public GameObject Dah;
+        
+        [Space(20)]public float BreathHoldDuration;
         public bool Breathing;
         public Slider BreathMetre;
         public Image BreathMetreImage;
         public TextMeshProUGUI FusRoDah;
 
-        [Space(20)] public float Fus = 0.5f;
-        public float Ro = 1.25f;
-        public float Dah = 2f;
+        [Space(20)] public float FusTime = 0.5f;
+        public float RoTime = 1.25f;
+       public float DahTime = 2f;
         public float MaxBreath = 2.25f;
+
+        private bool CanFus = false;
+        private bool CanRo = false;
+        private bool CanDah = false;
 
 
         [Header("Cosmetics")] public Color DefaultColour;
@@ -196,6 +206,33 @@ namespace Entity
                 //Debug.Log("Held breath for: " + BreathHoldDuration + " seconds.");
                 BreathHoldDuration = 0;
                 FusRoDah.text = "";
+
+                if (CanFus)
+                {
+                    Fus.SetActive(true);
+                    BreatheAudio.clip = FusSFX;
+                    BreatheAudio.Play();
+                    StartCoroutine(EndBreath(Fus, BreathActiveTime, CanFus));
+
+                }
+
+                if (CanRo)
+                {
+                    Ro.SetActive(true);
+                    BreatheAudio.clip = RoSFX;
+                    BreatheAudio.Play();
+                    StartCoroutine(EndBreath(Ro, BreathActiveTime, CanRo));
+
+                }
+                
+                if (CanDah)
+                {
+                    Dah.SetActive(true);
+                    BreatheAudio.clip = DahSFX;
+                    BreatheAudio.Play();
+                    StartCoroutine(EndBreath(Dah, BreathActiveTime,CanDah));
+
+                }
             }
 
             BreathMetre.value = BreathHoldDuration;
@@ -209,44 +246,61 @@ namespace Entity
             {
                 FusRoDah.text = "";
                 BreathMetre.value = 0;
+                CanFus = false;
+                CanRo = false;
+                CanDah = false;
                 return;
             }
 
 
-            if (BreathHoldDuration < Fus)
+            if (BreathHoldDuration < FusTime)
             {
                 BreathMetreImage.color = DefaultColour;
                 FusRoDah.text = "";
             }
 
-            else if (BreathHoldDuration < Ro && BreathHoldDuration > Fus)
+            else if (BreathHoldDuration < RoTime && BreathHoldDuration > FusTime)
             {
                 BreathMetreImage.color = FusColour;
                 FusRoDah.text = "FUS!";
+                CanFus = true;
 
                 BreatheAudio.clip = FusSFX;
                 BreatheAudio.Play();
             }
 
-            else if (BreathHoldDuration < Dah && BreathHoldDuration > Ro)
+            else if (BreathHoldDuration < DahTime && BreathHoldDuration > RoTime)
             {
                 BreathMetreImage.color = RoColour;
                 FusRoDah.text = "RO!";
-
-                BreatheAudio.clip = RoSFX;
-                BreatheAudio.Play();
+                CanFus = false;
+                CanRo = true;
             }
 
-            else if (BreathHoldDuration < MaxBreath && BreathHoldDuration > Dah)
+            else if (BreathHoldDuration < MaxBreath && BreathHoldDuration > DahTime)
             {
                 BreathMetreImage.color = DahColour;
                 FusRoDah.text = "DAH!";
-
-                BreatheAudio.clip = DahSFX;
-                BreatheAudio.Play();
+                CanRo = false;
+                CanDah = true;
             }
 
             FusRoDah.color = BreathMetreImage.color;
+        }
+        
+        
+        
+        private IEnumerator EndBreath(GameObject breath, float breathActiveTime, bool breathToggle)
+        {
+            breathToggle = false;
+            yield return new WaitForSeconds(breathActiveTime);
+            OnEndBreath(breath);
+        }
+
+
+        private static void OnEndBreath(GameObject breath)
+        {
+            breath.SetActive(false);
         }
     }
 }
