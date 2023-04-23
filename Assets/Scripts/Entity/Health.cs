@@ -17,7 +17,7 @@ namespace Entity
         private float _invulnerabilityTime;
         private bool _invulnerable;
 
-        private bool IsDead { get; set; }
+        public bool IsDead { get; set; }
         
         
         public int CurrentHealth
