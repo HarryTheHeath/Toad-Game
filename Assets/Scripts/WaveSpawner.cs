@@ -8,7 +8,7 @@ public class WaveSpawner : MonoBehaviour
  
     public Transform[] _spawnPoints;
  
-    private float _spawnBuffer;
+    private float _waveBuffer;
     private int i = 0;
  
     private bool _stopSpawning = false;
@@ -17,7 +17,7 @@ public class WaveSpawner : MonoBehaviour
     {
  
         _currentWave = Waves[i];
-        _spawnBuffer = _currentWave.TimeBeforeThisWave;
+        _waveBuffer = _currentWave.TimeBeforeThisWave;
     }
  
     private void Update()
@@ -26,12 +26,12 @@ public class WaveSpawner : MonoBehaviour
             (_stopSpawning)
             return;
         
-        if (Time.time >= _spawnBuffer)
+        if (Time.time >= _waveBuffer)
         {
             SpawnWave();
             IncrementWave();
  
-            _spawnBuffer = Time.time + _currentWave.TimeBeforeThisWave;
+            _waveBuffer = Time.time + _currentWave.TimeBeforeThisWave;
         }
     }
  
