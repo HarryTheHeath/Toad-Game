@@ -88,7 +88,10 @@ namespace Entity
                 }
             }
             transform.DetachChildren();
-            
+
+            if (CompareTag("Player"))
+                GetComponent<BoxCollider2D>().enabled = false;
+
             IsDead = true;
         }
         
