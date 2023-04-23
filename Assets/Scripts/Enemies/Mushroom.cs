@@ -1,5 +1,4 @@
 using Entity;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Mushroom : MonoBehaviour
@@ -13,6 +12,12 @@ public class Mushroom : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private PlayerController _playerController;
     public int Damage = 1;
+    
+    
+    [Header("Ground Checks")] public Transform FeetPos;
+    public LayerMask GroundLayer;
+    public float CheckRadius = 0.3f;
+    public bool IsGrounded = false;
 
     private void Start()
     {
@@ -24,7 +29,6 @@ public class Mushroom : MonoBehaviour
         }
         
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        _rigidbody2D.velocity = new Vector2(_speed, 0);
 
         if (_enter != null)
         {
@@ -33,8 +37,27 @@ public class Mushroom : MonoBehaviour
         }
     }
 
-    
-    
+
+    private void Update()
+    {
+        IsGrounded = Physics2D.OverlapCircle(FeetPos.position, CheckRadius, GroundLayer);
+
+
+        if (IsGrounded)
+        {
+            _rigidbody2D.velocity = new Vector2(_speed, 0);
+            _rigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionY;
+            GetComponent<BoxCollider2D>().enabled = false;
+        }
+        else
+        {
+            _rigidbody2D.constraints = RigidbodyConstraints2D.None;
+            _rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+            GetComponent<BoxCollider2D>().enabled = true; 
+        }
+    }
+
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (gameObject.GetComponent<Health>().IsDead)
@@ -50,27 +73,20 @@ public class Mushroom : MonoBehaviour
         {
             _rigidbody2D.velocity = Vector2.zero;
 
-            if (_eat != null)
-            {
-                _audio.clip = _eat;
-                _audio.Play();
-            }
+            _audio.clip = _eat;
+            _audio.Play();
             Debug.Log("MUSHROOM ATE TOAD!");
             other.gameObject.GetComponent<IDamageable>().ModifyHealth(-Damage);
             Die();
         }
     }
+
     
     public void Die()
     {
-        if (_die != null)
-        {
-            _audio.clip = _die;
-            _audio.Play();
-            Destroy(gameObject, _audio.clip.length);
-
-        }
-        
+        _audio.clip = _die;
+        _audio.Play();
+        Destroy(gameObject, _audio.clip.length);
         GetComponent<IDamageable>().ModifyHealth(-Damage);
     }
 }
