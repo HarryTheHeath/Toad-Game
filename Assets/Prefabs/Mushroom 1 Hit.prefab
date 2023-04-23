@@ -182,6 +182,7 @@ GameObject:
   - component: {fileID: 8882957853866990052}
   - component: {fileID: 8863457608562866771}
   - component: {fileID: 6715116531036668403}
+  - component: {fileID: 8228271378555639289}
   m_Layer: 6
   m_Name: Mushroom 1 Hit
   m_TagString: Enemy
@@ -225,6 +226,7 @@ MonoBehaviour:
   _die: {fileID: 8300000, guid: a814a49a3c1ce5a44a2c84b6565ff6d6, type: 3}
   _eat: {fileID: 8300000, guid: 7ec0df3d275613948a40e727cc220748, type: 3}
   _audio: {fileID: 6715116531036668403}
+  Damage: 1
 --- !u!95 &4123555879914196365
 Animator:
   serializedVersion: 5
@@ -389,6 +391,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8228271378555639289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3919939057160273290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f171e500e4aa1074f8ed486abd5a3b6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 1
+  _invulnerabilityTime: 0
 --- !u!1 &7036677032332176312
 GameObject:
   m_ObjectHideFlags: 0

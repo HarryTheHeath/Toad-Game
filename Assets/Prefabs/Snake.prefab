@@ -351,6 +351,7 @@ GameObject:
   - component: {fileID: -7086004947858538626}
   - component: {fileID: -4928972779540249378}
   - component: {fileID: -6317747382984923812}
+  - component: {fileID: -1909364884646727624}
   m_Layer: 6
   m_Name: Snake
   m_TagString: Snake
@@ -398,6 +399,7 @@ MonoBehaviour:
   _audio: {fileID: -4928972779540249378}
   _head: {fileID: 2156868725534776521}
   _mouth: {fileID: -6317747382984923812}
+  Damage: 1
 --- !u!95 &6886557497300486304
 Animator:
   serializedVersion: 5
@@ -578,6 +580,20 @@ CircleCollider2D:
   m_Offset: {x: 1.2649074, y: -0.3818593}
   serializedVersion: 2
   m_Radius: 0.5170474
+--- !u!114 &-1909364884646727624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5822675458546989223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f171e500e4aa1074f8ed486abd5a3b6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 1
+  _invulnerabilityTime: 0
 --- !u!1 &5822675458593377326
 GameObject:
   m_ObjectHideFlags: 0
