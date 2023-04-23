@@ -40,6 +40,9 @@ public class Mushroom : MonoBehaviour
 
     private void Update()
     {
+        if (transform.position.y < - 10)
+            Destroy(gameObject);
+        
         IsGrounded = Physics2D.OverlapCircle(FeetPos.position, CheckRadius, GroundLayer);
 
 
