@@ -17,15 +17,24 @@ public class BackgroundAudio : MonoBehaviour
 
     private void Start()
     {
-        soundscape.clip = PickRandom(loopingSoundscapes);
-        soundscape.loop = true;
-        soundscape.Play();
+        if (loopingSoundscapes.Length > 0)
+        {
+            soundscape.clip = PickRandom(loopingSoundscapes);
+            soundscape.loop = true;
+            soundscape.Play();
+        }
 
-        music.clip = PickRandom(loopingMusics);
-        music.loop = true;
-        music.Play();
+        if (loopingMusics.Length > 0)
+        {
+            music.clip = PickRandom(loopingMusics);
+            music.loop = true;
+            music.Play();
+        }
 
-        StartCoroutine(PlayRandomSFX(0));
+        if (randomSFXs.Length > 0)
+        {
+            StartCoroutine(PlayRandomSFX(0));
+        }
     }
 
     IEnumerator PlayRandomSFX(float delay)
