@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: WaveTwo
   m_EditorClassIdentifier: 
   <Enemy>k__BackingField:
-  - {fileID: 3919939057160273290, guid: e8b814a5b53e3ad4f8afd9fd041e7754, type: 3}
-  - {fileID: 3919939057160273290, guid: e8b814a5b53e3ad4f8afd9fd041e7754, type: 3}
+  - {fileID: 4269096987551086040, guid: 70e6913968de6194582460d13f12d77b, type: 3}
+  - {fileID: 4269096987551086040, guid: 70e6913968de6194582460d13f12d77b, type: 3}
   - {fileID: 5822675458546989223, guid: 8acf6b881ed0b42468a0565e3c1f9381, type: 3}
   - {fileID: 5822675458546989223, guid: 8acf6b881ed0b42468a0565e3c1f9381, type: 3}
   <SpawnBuffer>k__BackingField:
-  - 3
-  - 2
-  - 4
-  - 0
+  - 5
+  - 5
+  - 10
+  - 10
   <SpawnPoint>k__BackingField:
-  - {fileID: 5175139416955750227, guid: 62dcf8e3ae1b6484da1975014bd0a106, type: 3}
-  - {fileID: 5910943988669596287, guid: 0847bd38f1a50f7468817e5edee68519, type: 3}
+  - {fileID: 2001852615874794320, guid: 24a98ec1e5fb6d74a8a5d7f64720184c, type: 3}
+  - {fileID: 4360794637912360590, guid: 12ea698f1821cc341b7ef31ec1919c6e, type: 3}
   - {fileID: 5910943988669596287, guid: 0847bd38f1a50f7468817e5edee68519, type: 3}
   - {fileID: 5175139416955750227, guid: 62dcf8e3ae1b6484da1975014bd0a106, type: 3}
