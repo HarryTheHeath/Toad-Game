@@ -37,6 +37,8 @@ public class Mushroom : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (gameObject.GetComponent<Health>().IsDead)
+            return;
 
         if (other.gameObject.CompareTag("Enemy"))
             return;
