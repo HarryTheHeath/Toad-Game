@@ -17,12 +17,11 @@ public class WaveSpawner : MonoBehaviour
     {
  
         _currentWave = Waves[i];
-        _waveBuffer = _currentWave.TimeBeforeThisWave;
+        _waveBuffer = _currentWave.SpawnBuffer[0];
     }
  
     private void Update()
-    {
-        if
+    { if
             (_stopSpawning)
             return;
         
@@ -31,18 +30,18 @@ public class WaveSpawner : MonoBehaviour
             SpawnWave();
             IncrementWave();
  
-            _waveBuffer = Time.time + _currentWave.TimeBeforeThisWave;
+            _waveBuffer = Time.time + _currentWave.SpawnBuffer[0];
         }
     }
  
     private void SpawnWave()
     {
-        for (int i = 0; i < _currentWave.NumberToSpawn; i++)
+        //for (int i = 0; i < _currentWave.NumberToSpawn; i++)
         {
-            int randomEnemy = Random.Range(0, _currentWave.EnemiesInWave.Length);
+            int randomEnemy = Random.Range(0, _currentWave.Enemy.Length);
             int randomSpawnPoint = Random.Range(0, _spawnPoints.Length);
  
-            Instantiate(_currentWave.EnemiesInWave[randomEnemy], _spawnPoints[randomSpawnPoint].position, _spawnPoints[randomSpawnPoint].rotation);
+            Instantiate(_currentWave.Enemy[randomEnemy], _spawnPoints[randomSpawnPoint].position, _spawnPoints[randomSpawnPoint].rotation);
         }
     }
  
