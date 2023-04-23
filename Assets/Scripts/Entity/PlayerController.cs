@@ -208,31 +208,13 @@ namespace Entity
                 FusRoDah.text = "";
 
                 if (CanFus)
-                {
-                    Fus.SetActive(true);
-                    BreatheAudio.clip = FusSFX;
-                    BreatheAudio.Play();
-                    StartCoroutine(EndBreath(Fus, BreathActiveTime, CanFus));
+                    Attack(Fus, FusSFX, BreathActiveTime, CanFus);
 
-                }
-
-                if (CanRo)
-                {
-                    Ro.SetActive(true);
-                    BreatheAudio.clip = RoSFX;
-                    BreatheAudio.Play();
-                    StartCoroutine(EndBreath(Ro, BreathActiveTime, CanRo));
-
-                }
+                else if (CanRo)
+                    Attack(Ro, RoSFX, BreathActiveTime, CanRo);
                 
-                if (CanDah)
-                {
-                    Dah.SetActive(true);
-                    BreatheAudio.clip = DahSFX;
-                    BreatheAudio.Play();
-                    StartCoroutine(EndBreath(Dah, BreathActiveTime,CanDah));
-
-                }
+                else if (CanDah)
+                    Attack(Dah, DahSFX, BreathActiveTime, CanDah);
             }
 
             BreathMetre.value = BreathHoldDuration;
@@ -287,6 +269,18 @@ namespace Entity
 
             FusRoDah.color = BreathMetreImage.color;
         }
+
+        
+        
+
+        private void Attack(GameObject breath, AudioClip breathSFX, float breathActiveTime, bool breathToggle)
+        {
+            breath.SetActive(true);
+            BreatheAudio.clip = breathSFX;
+            BreatheAudio.Play();
+            StartCoroutine(EndBreath(breath, breathActiveTime,breathToggle));
+        }
+        
         
         
         
@@ -297,10 +291,9 @@ namespace Entity
             OnEndBreath(breath);
         }
 
+        
+        
 
-        private static void OnEndBreath(GameObject breath)
-        {
-            breath.SetActive(false);
-        }
+        private static void OnEndBreath(GameObject breath) => breath.SetActive(false);
     }
 }
