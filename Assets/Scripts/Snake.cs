@@ -10,6 +10,7 @@ public class Snake : MonoBehaviour
     public AudioSource _audio;
     public BoxCollider2D _head;
     public CircleCollider2D _mouth;
+    public int Damage = 1;
     
     private Rigidbody2D _rigidbody2D;
     private PlayerController _playerController;
@@ -55,6 +56,9 @@ public class Snake : MonoBehaviour
                 _audio.Play();
             }
             Debug.Log("SNAKE ATE TOAD!");
+            other.gameObject.GetComponent<IDamageable>().ModifyHealth(-Damage);
+            Die();
+
         }
     }
 
@@ -81,8 +85,10 @@ public class Snake : MonoBehaviour
         {
             _audio.clip = _die;
             _audio.Play();
+            Destroy(gameObject, _audio.clip.length);
+
         }
         
-        Destroy(gameObject, _audio.clip.length);
+        GetComponent<IDamageable>().ModifyHealth(-Damage);
     }
 }
