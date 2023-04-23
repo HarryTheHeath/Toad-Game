@@ -1,4 +1,3 @@
-
 using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -9,6 +8,7 @@ public class NewWaveSpawner : MonoBehaviour
     public GameObject[] enemyTypes;
     public Transform[] SpawnPoints;
     public float TimeBetweenSpawns;
+    public float SpawnTimeMultiplier = 0.5f;
     public float WaveBuffer = 3f;
     private float NextSpawnTime;
 
@@ -26,7 +26,7 @@ public class NewWaveSpawner : MonoBehaviour
             Instantiate(enemyTypes[0], SpawnPoints[Random.Range(0, SpawnPoints.Length)].position,
                 quaternion.identity);
 
-            NextSpawnTime = Time.time + TimeBetweenSpawns;
+            NextSpawnTime = Time.time + TimeBetweenSpawns + Random.Range(-SpawnTimeMultiplier, SpawnTimeMultiplier);
         }
         
     }
