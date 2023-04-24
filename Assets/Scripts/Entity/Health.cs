@@ -95,9 +95,8 @@ namespace Entity
                 {
                     StartCoroutine(FadeOut(sprite, 1));
                 }
-                Destroy(child.gameObject, 1);
             }
-            transform.DetachChildren();
+            Destroy(gameObject, 1.1f);
 
             if (CompareTag("Player"))
             {
