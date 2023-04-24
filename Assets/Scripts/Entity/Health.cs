@@ -95,6 +95,7 @@ namespace Entity
                 {
                     StartCoroutine(FadeOut(sprite, 1));
                 }
+                Destroy(child.gameObject, 1);
             }
             transform.DetachChildren();
 
