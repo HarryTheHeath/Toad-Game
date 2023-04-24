@@ -124,6 +124,11 @@ MonoBehaviour:
   Wave:
   - {fileID: 11400000, guid: 82172221c0d39784c8f525c4293f6369, type: 2}
   - {fileID: 11400000, guid: 66dcbb61ac5dbdd49a9101b08ee24bc1, type: 2}
+  - {fileID: 11400000, guid: a97c574d417bd5c44a20c4193418d0dd, type: 2}
+  - {fileID: 11400000, guid: 3978be876769fb64bb7c41a064310b9e, type: 2}
+  - {fileID: 11400000, guid: 80e6e9d554f05544099591234fd1e137, type: 2}
+  - {fileID: 11400000, guid: f3ec903c9fd765b4a806e755a5845e00, type: 2}
+  - {fileID: 11400000, guid: 2d6e02f04b8c8154a9378c6de1991532, type: 2}
   SpawnTimeMultiplier: 0.1
   WaveBuffer: 5
   CurrentWave: 0
