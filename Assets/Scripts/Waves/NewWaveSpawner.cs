@@ -10,8 +10,9 @@ public class NewWaveSpawner : MonoBehaviour
     public Wave[] Wave;
     public float SpawnTimeMultiplier = 0.5f;
     public float WaveBuffer = 3f;
+    [HideInInspector]
+    public int CurrentWave;
     private float NextSpawnTime;
-    private int CurrentWave;
 
     // Start is called before the first frame update
     private void Awake() => NextSpawnTime += WaveBuffer;
