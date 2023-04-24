@@ -240,14 +240,14 @@ namespace Entity
             else if (BreathHoldDuration < RoTime && BreathHoldDuration > FusTime)
             {
                 BreathMetreImage.color = FusColour;
-                FusRoDah.text = "FUS!";
+                FusRoDah.text = "RIBBIT!";
                 CanFus = true;
             }
 
             else if (BreathHoldDuration < DahTime && BreathHoldDuration > RoTime)
             {
                 BreathMetreImage.color = RoColour;
-                FusRoDah.text = "RO!";
+                FusRoDah.text = "KVACK!";
                 CanFus = false;
                 CanRo = true;
             }
@@ -255,7 +255,7 @@ namespace Entity
             else if (BreathHoldDuration < MaxBreath && BreathHoldDuration > DahTime)
             {
                 BreathMetreImage.color = DahColour;
-                FusRoDah.text = "DAH!";
+                FusRoDah.text = "CROAK!";
                 CanRo = false;
                 CanDah = true;
             }
