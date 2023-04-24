@@ -10,8 +10,9 @@ public class NewWaveSpawner : MonoBehaviour
     public Wave[] Wave;
     public float SpawnTimeMultiplier = 0.5f;
     public float WaveBuffer = 3f;
+    [HideInInspector]
+    public int CurrentWave;
     private float NextSpawnTime;
-    private int CurrentWave;
 
     // Start is called before the first frame update
     private void Awake() => NextSpawnTime += WaveBuffer;
@@ -40,6 +41,8 @@ public class NewWaveSpawner : MonoBehaviour
 
     private IEnumerator CommenceWaves(int currentWave)
     {
+        FindObjectOfType<WaveScoreUI>().AnnounceNewWave(CurrentWave);
+        
         for (var i = 0; i < Wave[currentWave].Enemy.Length; i++)
         {
             Instantiate(Wave[currentWave].Enemy[i], Wave[currentWave].SpawnPoint[i].position,

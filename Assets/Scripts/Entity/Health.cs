@@ -11,6 +11,8 @@ namespace Entity
         public Action<int> OnHealthChanged;
         [SerializeField]
         private int _health;
+
+        private PlayerHealthUI _playerHealthUI;
         
         [SerializeField]
         [Tooltip("The amount of time the entity is invulnerable after being hit")]
@@ -30,9 +32,12 @@ namespace Entity
         {
             CurrentHealth = _health;
             OnHealthChanged?.Invoke(CurrentHealth);
-            
+
             if (CompareTag("Player"))
-                GameObject.Find("PlayerHealth").GetComponent<TMPro.TextMeshProUGUI>().text = _health.ToString();
+            {
+                _playerHealthUI = FindObjectOfType<PlayerHealthUI>();
+                _playerHealthUI.SetMaxHealth(CurrentHealth, true);   
+            }
         }
 
         public void ModifyHealth(int healthValueChange)
@@ -44,7 +49,7 @@ namespace Entity
             OnHealthChanged?.Invoke(CurrentHealth);
             
             if (CompareTag("Player"))
-                GameObject.Find("PlayerHealth").GetComponent<TMPro.TextMeshProUGUI>().text = _health.ToString();
+                _playerHealthUI.SetHealth(CurrentHealth);
 
 
             if (!_invulnerable && healthValueChange <= 0)
@@ -79,7 +84,7 @@ namespace Entity
             foreach (Transform child in transform)
             {
                 Rigidbody2D r = child.GetComponent<Rigidbody2D>();
-                if (r is null)
+                if (r == null)
                 {
                     r = child.AddComponent<Rigidbody2D>();
                 }
@@ -94,7 +99,10 @@ namespace Entity
             transform.DetachChildren();
 
             if (CompareTag("Player"))
+            {
                 GetComponent<BoxCollider2D>().enabled = false;
+                FindObjectOfType<GameManager>().OnDeath();
+            }
 
             IsDead = true;
         }
