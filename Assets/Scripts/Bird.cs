@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Entity;
 using UnityEngine;
 
@@ -13,6 +10,16 @@ public class Bird : MonoBehaviour
     public float _speed = 5f;
     public int Damage = 1;
     public Rigidbody2D _rigidbody2D;
+
+
+    private void Start()
+    {
+        if (transform.position.x > 0)
+        {
+            transform.eulerAngles = new Vector3(0, 180, 0);
+            _speed = 0-_speed;
+        }
+    }
 
     private void OnEnable()
     {
