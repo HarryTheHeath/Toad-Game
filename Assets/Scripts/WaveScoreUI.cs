@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -15,8 +14,9 @@ public class WaveScoreUI : MonoBehaviour
     public void AnnounceNewWave(int waveNumber)
     {
         Debug.Log("wave: " + waveNumber);
-        
-        _WaveNumber.text = waveNumber.ToString();
+
+        var wave = waveNumber + 1;
+        _WaveNumber.text = $"Round # {wave.ToString()}";
         
         _Animator.SetTrigger("show");
         
