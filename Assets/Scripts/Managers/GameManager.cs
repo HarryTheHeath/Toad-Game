@@ -1,12 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -27,7 +21,8 @@ public class GameManager : MonoBehaviour
         //Pause game
         //?
 
-        Highscore.text = WaveSpawner.CurrentWave.ToString();
+        var wave = WaveSpawner.CurrentWave + 1;
+        Highscore.text = wave.ToString();
 
         ShowHighScoreMenu();
 
