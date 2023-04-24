@@ -33,7 +33,7 @@ public class NewWaveSpawner : MonoBehaviour
         for (int i = 0; i < Wave.Length; i++)
         {
             Debug.Log($"Wave {i} begins...");
-            yield return StartCoroutine(CommenceWaves(currentWave));
+            yield return StartCoroutine(CommenceWaves(i));
         }
     }
     
