@@ -45,6 +45,11 @@ public class NewWaveSpawner : MonoBehaviour
         
         for (var i = 0; i < Wave[currentWave].Enemy.Length; i++)
         {
+            if (i == 0)
+            {
+                yield return new WaitForSeconds(WaveBuffer);
+            }
+            
             Instantiate(Wave[currentWave].Enemy[i], Wave[currentWave].SpawnPoint[i].position,
                 quaternion.identity);
                 

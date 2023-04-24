@@ -125,7 +125,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 82172221c0d39784c8f525c4293f6369, type: 2}
   - {fileID: 11400000, guid: 66dcbb61ac5dbdd49a9101b08ee24bc1, type: 2}
   SpawnTimeMultiplier: 0.1
-  WaveBuffer: 3
+  WaveBuffer: 5
   CurrentWave: 0
 --- !u!1 &8130151242257685582
 GameObject:
