@@ -41,6 +41,8 @@ public class NewWaveSpawner : MonoBehaviour
 
     private IEnumerator CommenceWaves(int currentWave)
     {
+        FindObjectOfType<WaveScoreUI>().AnnounceNewWave(CurrentWave);
+        
         for (var i = 0; i < Wave[currentWave].Enemy.Length; i++)
         {
             Instantiate(Wave[currentWave].Enemy[i], Wave[currentWave].SpawnPoint[i].position,

@@ -1125,7 +1125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Menu: {fileID: 5088583030770937883}
   Highscore: {fileID: 309660406}
-  Fader: {fileID: 1779940131}
+  Fader: {fileID: 0}
 --- !u!114 &1779940131
 MonoBehaviour:
   m_ObjectHideFlags: 0
